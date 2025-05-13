@@ -1,0 +1,92 @@
+# Build directories
+/build/
+/bin/
+/out/
+/Release/
+/Debug/
+/x64/
+/Win32/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Visual Studio files
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.user
+*.suo
+*.db
+*.opendb
+*.VC.db
+ipch/
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+*.cachefile
+*.VC.VC.opendb
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+!libs/**/*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+!libs/**/*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+!bin/Release/*
+
+# Debug symbols
+*.pdb
+*.ilk
+*.map
+*.exp
+
+# Temporary files
+*.swp
+*~
+*.tmp
+*.bak
+*.log
+.DS_Store
+Thumbs.db
+
+# Project specific
+/logs/
+resources/version.rc
+
+# Keep specific files from lib directories
+!libs/Detours/include/*.h
+!libs/Detours/lib/*.lib
