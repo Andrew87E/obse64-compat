@@ -5,6 +5,9 @@ project(OBSE64GP VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Add custom CMake modules directory
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # Windows-specific settings
 if(WIN32)
     # Add Windows target version macros
@@ -20,34 +23,14 @@ endif()
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Find Detours
-if(DEFINED DETOURS_DIR)
-    set(DETOURS_INCLUDE_DIR "${DETOURS_DIR}/include")
-    set(DETOURS_LIBRARY "${DETOURS_DIR}/lib/detours.lib")
+# Find Detours using our custom module
+find_package(Detours REQUIRED)
+
+if(NOT DETOURS_FOUND)
+    message(FATAL_ERROR "Microsoft Detours library not found. Please ensure you have detours.h and detours.lib in your library paths.")
 else()
-    find_path(DETOURS_INCLUDE_DIR detours.h PATHS ${CMAKE_SOURCE_DIR}/libs/Detours/include)
-    find_library(DETOURS_LIBRARY 
-                 NAMES detours detours.lib libdetours.a 
-                 PATHS ${CMAKE_SOURCE_DIR}/libs/Detours/lib)
-    
-    # If still not found, create a stub
-    if(NOT DETOURS_LIBRARY)
-        message(STATUS "Creating stub Detours library for development")
-        file(WRITE ${CMAKE_SOURCE_DIR}/libs/Detours/lib/detours.lib "")
-        set(DETOURS_LIBRARY "${CMAKE_SOURCE_DIR}/libs/Detours/lib/detours.lib")
-    endif()
-endif()
-
-
-# Print diagnostic information
-message(STATUS "Detours Include: ${DETOURS_INCLUDE_DIR}")
-message(STATUS "Detours Library: ${DETOURS_LIBRARY}")
-
-if(NOT DETOURS_INCLUDE_DIR OR NOT DETOURS_LIBRARY)
-    message(FATAL_ERROR "Microsoft Detours not found. Please ensure you have:
-    1. ${CMAKE_SOURCE_DIR}/libs/Detours/include/detours.h
-    2. ${CMAKE_SOURCE_DIR}/libs/Detours/lib/detours.lib
-Or provide the path using -DDETOURS_DIR=path/to/detours")
+    message(STATUS "Using Detours include directory: ${DETOURS_INCLUDE_DIR}")
+    message(STATUS "Using Detours library: ${DETOURS_LIBRARY}")
 endif()
 
 # Add include directories

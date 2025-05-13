@@ -14,10 +14,9 @@
 
 namespace ObseGPCompat
 {
-
     // Global variables
     std::filesystem::path g_GamePassInstallPath;
-    std::filesystem::path g_SteamInstallPath;
+    std::filesystem::path g_ObsePath;
     std::filesystem::path g_CompatLayerPath;
 
     // Global components
@@ -66,14 +65,9 @@ namespace ObseGPCompat
         }
 
         // Load paths from configuration
-        // g_GamePassInstallPath = g_ConfigurationManager->GetString("Paths", "GamePassInstall", "");
-        // g_SteamInstallPath = g_ConfigurationManager->GetString("Paths", "SteamInstall", "");
+        g_GamePassInstallPath = g_ConfigurationManager->GetString("Paths", "GamePassInstall", "");
 
-        g_GamePassInstallPath = "N:\\Xbox\\The Elder Scrolls IV- Oblivion Remastered\\Content";
-        g_SteamInstallPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Oblivion Remastered";
-        Log(LogLevel::Info, "Manually set Game Pass path to: %s", g_GamePassInstallPath.string().c_str());
-        Log(LogLevel::Info, "Manually set Steam path to: %s", g_SteamInstallPath.string().c_str());
-
+        // Set CompatLayerPath to current executable directory
         g_CompatLayerPath = std::filesystem::current_path();
 
         // Initialize other components

@@ -1,39 +1,42 @@
 #pragma once
 
-#include "ObseGPCompat.h"
+// Include our Windows wrapper first
+#include "WindowsWrapper.h"
 
-namespace ObseGPCompat {
+// Standard includes
+#include <filesystem>
+#include <map>
+#include <string>
 
-    class VirtualFileSystem {
+namespace ObseGPCompat
+{
+
+    class VirtualFileSystem
+    {
     public:
         VirtualFileSystem();
         ~VirtualFileSystem();
-        
-        // Initialize the virtual file system
+
         bool Initialize();
-        
-        // Map a virtual path to a real path
-        bool MapPath(const std::filesystem::path& virtualPath, const std::filesystem::path& realPath);
-        
-        // Translate a virtual path to a real path
-        std::filesystem::path TranslateToReal(const std::filesystem::path& virtualPath);
-        
-        // Translate a real path to a virtual path
-        std::filesystem::path TranslateToVirtual(const std::filesystem::path& realPath);
-        
-        // Check if a path is virtual
-        bool IsVirtualPath(const std::filesystem::path& path);
-        
-        // File operations on virtual paths
-        bool FileExists(const std::filesystem::path& virtualPath);
-        bool CreateDirectory(const std::filesystem::path& virtualPath);
-        bool DeleteFile(const std::filesystem::path& virtualPath);
-        bool CopyFile(const std::filesystem::path& srcVirtualPath, const std::filesystem::path& destVirtualPath, bool overwrite);
-        
+
+        // Path mapping methods
+        bool MapPath(const std::filesystem::path &virtualPath, const std::filesystem::path &realPath);
+
+        // Path translation methods
+        std::filesystem::path TranslateToReal(const std::filesystem::path &virtualPath);
+        std::filesystem::path TranslateToVirtual(const std::filesystem::path &realPath);
+
+        // Filesystem operation methods
+        bool IsVirtualPath(const std::filesystem::path &path);
+        bool FileExists(const std::filesystem::path &virtualPath);
+        bool CreateDirectory(const std::filesystem::path &virtualPath);
+        bool DeleteFile(const std::filesystem::path &virtualPath);
+        bool CopyFile(const std::filesystem::path &srcVirtualPath, const std::filesystem::path &destVirtualPath, bool overwrite = false);
+
     private:
-        // Maps for virtual to real paths
-        std::unordered_map<std::string, std::string> m_VirtualToRealPaths;
-        std::unordered_map<std::string, std::string> m_RealToVirtualPaths;
+        // Maps for path translation
+        std::map<std::string, std::string> m_VirtualToRealPaths;
+        std::map<std::string, std::string> m_RealToVirtualPaths;
     };
 
 } // namespace ObseGPCompat
