@@ -1,0 +1,37 @@
+#include <winver.h>
+
+#define VER_FILEVERSION             @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
+#define VER_FILEVERSION_STR         "@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@.0\0"
+
+#define VER_PRODUCTVERSION          @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
+#define VER_PRODUCTVERSION_STR      "@PROJECT_VERSION@\0"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VER_FILEVERSION
+PRODUCTVERSION  VER_PRODUCTVERSION
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       0
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_DLL
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName",      "OBSE64GP Project\0"
+            VALUE "FileDescription",   "OBSE64 Game Pass Compatibility Layer\0"
+            VALUE "FileVersion",       VER_FILEVERSION_STR
+            VALUE "InternalName",      "OBSE64GP\0"
+            VALUE "LegalCopyright",    "Copyright (C) 2025\0"
+            VALUE "OriginalFilename",  "OBSE64GP.dll\0"
+            VALUE "ProductName",       "OBSE64 Game Pass Compatibility Layer\0"
+            VALUE "ProductVersion",    VER_PRODUCTVERSION_STR
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
